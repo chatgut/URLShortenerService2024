@@ -1,5 +1,8 @@
 package com.example.urlshortenerservice2024.service;
 
+import com.example.urlshortenerservice2024.entity.UrlMapping;
+import com.example.urlshortenerservice2024.repository.UrlMappingRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -9,20 +12,26 @@ import java.util.UUID;
 @Service
 public class UrlShortenerService {
 
-    private final Map<String, String> urlMap = new HashMap<>();
+    @Autowired
+    private static UrlMappingRepository urlMappingRepository;
 
-    public String shortenUrl(String longUrl) {
+    public static String shortenUrl(String longUrl) {
         String shortUrl = generateShortUrl();
-        urlMap.put(shortUrl, longUrl);
+        UrlMapping urlMapping = new UrlMapping();
+        urlMapping.setLongUrl(longUrl);
+        urlMapping.setShortUrl(shortUrl);
+        urlMappingRepository.save(urlMapping);
         return shortUrl;
     }
 
     public String getLongUrl(String shortUrl) {
-        return urlMap.get(shortUrl);
+        UrlMapping urlMapping = urlMappingRepository.findByShortUrl(shortUrl);
+        return urlMapping != null ? urlMapping.getLongUrl() : null;
     }
 
-    private String generateShortUrl() {
+    private static String generateShortUrl() {
         UUID uuid = UUID.randomUUID();
         return uuid.toString().substring(0, 7);
     }
 }
+
