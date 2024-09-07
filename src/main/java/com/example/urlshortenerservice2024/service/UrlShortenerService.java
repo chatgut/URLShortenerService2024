@@ -13,9 +13,9 @@ import java.util.UUID;
 public class UrlShortenerService {
 
     @Autowired
-    private static UrlMappingRepository urlMappingRepository;
+    private UrlMappingRepository urlMappingRepository;
 
-    public static String shortenUrl(String longUrl) {
+    public String shortenUrl(String longUrl) {
         String shortUrl = generateShortUrl();
         UrlMapping urlMapping = new UrlMapping();
         urlMapping.setLongUrl(longUrl);
@@ -29,9 +29,10 @@ public class UrlShortenerService {
         return urlMapping != null ? urlMapping.getLongUrl() : null;
     }
 
-    private static String generateShortUrl() {
+    private String generateShortUrl() {
         UUID uuid = UUID.randomUUID();
         return uuid.toString().substring(0, 7);
     }
 }
+
 

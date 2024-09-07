@@ -5,6 +5,7 @@ public class UrlResponse {
     private String shortUrl;
     private String message;
 
+
     public UrlResponse(String longUrl, String shortUrl, String message) {
         this.longUrl = longUrl;
         this.shortUrl = shortUrl;
@@ -35,3 +36,4 @@ public class UrlResponse {
         this.message = message;
     }
 }
+
