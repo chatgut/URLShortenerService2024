@@ -2,18 +2,19 @@ package com.example.urlshortenerservice2024.service;
 
 import com.example.urlshortenerservice2024.entity.UrlMapping;
 import com.example.urlshortenerservice2024.repository.UrlMappingRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 @Service
 public class UrlShortenerService {
 
-    @Autowired
-    private UrlMappingRepository urlMappingRepository;
+    private final UrlMappingRepository urlMappingRepository;
+
+    public UrlShortenerService(UrlMappingRepository urlMappingRepository) {
+        this.urlMappingRepository = urlMappingRepository;
+    }
 
     public String shortenUrl(String longUrl) {
         String shortUrl = generateShortUrl();
