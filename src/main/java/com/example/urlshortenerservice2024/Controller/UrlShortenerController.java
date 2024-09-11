@@ -28,7 +28,7 @@ public class UrlShortenerController {
             UrlResponse response = new UrlResponse(longUrl, shortUrl, "URL successfully shortened");
             return ResponseEntity.ok(response);
         } catch (Exception e) {
-            e.printStackTrace(); // Print stack trace to log
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new UrlResponse(null, null, "Internal Server Error"));
         }
@@ -44,7 +44,7 @@ public class UrlShortenerController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Shortened URL not found");
             }
         } catch (Exception e) {
-            e.printStackTrace(); // Print stack trace to log
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal Server Error");
         }
     }

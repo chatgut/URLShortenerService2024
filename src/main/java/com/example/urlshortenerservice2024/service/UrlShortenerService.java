@@ -27,7 +27,13 @@ public class UrlShortenerService {
 
     public String getLongUrl(String shortUrl) {
         UrlMapping urlMapping = urlMappingRepository.findByShortUrl(shortUrl);
-        return urlMapping != null ? urlMapping.getLongUrl() : null;
+        if (urlMapping != null) {
+            System.out.println("Found long URL: " + urlMapping.getLongUrl());
+            return urlMapping.getLongUrl();
+        } else {
+            System.out.println("URL not found for short URL: " + shortUrl);
+            return null;
+        }
     }
 
     private String generateShortUrl() {
